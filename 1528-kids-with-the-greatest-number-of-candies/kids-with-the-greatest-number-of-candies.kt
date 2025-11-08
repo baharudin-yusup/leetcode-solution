@@ -1,9 +1,7 @@
 class Solution {
     fun kidsWithCandies(candies: IntArray, extraCandies: Int): List<Boolean> {
-        val minimumGreatestCandy = candies.maxOrNull() ?: 0
+        val threshold = (candies.maxOrNull() ?: 0) - extraCandies
 
-        return candies.map {
-            it + extraCandies >= minimumGreatestCandy
-        }
+        return List<Boolean>(candies.size) { candies[it] >= threshold }
     }
 }

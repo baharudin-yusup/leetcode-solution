@@ -1,7 +1,13 @@
 class Solution {
-    fun kidsWithCandies(candies: IntArray, extraCandies: Int): List<Boolean> {
+    fun kidsWithCandies(candies: IntArray, extraCandies: Int): BooleanArray {
         val threshold = (candies.maxOrNull() ?: 0) - extraCandies
 
-        return List<Boolean>(candies.size) { candies[it] >= threshold }
+        val output = BooleanArray(candies.size)
+
+        for (i in 0 until candies.size) {
+            output[i] = candies[i] >= threshold
+        }
+
+        return output
     }
 }

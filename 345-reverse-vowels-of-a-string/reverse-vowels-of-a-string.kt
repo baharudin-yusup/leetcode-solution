@@ -1,21 +1,28 @@
 class Solution {
+    fun isVowel(c: Char): Boolean {
+        return when (c) {
+            'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' -> true
+            else -> false
+        }
+    }
+
     fun reverseVowels(s: String): String {
         if (s.length < 2) return s
 
-        val vowels = setOf('a', 'i', 'u', 'e', 'o', 'A', 'I', 'U', 'E', 'O')
         var left = 0
         var right = s.length - 1
         val sArray = s.toCharArray()
 
         while (left < right) {
-            if (!vowels.contains(sArray[left])) {
+            val leftChar = sArray[left]
+            val rightChar = sArray[right]
+            if (!isVowel(leftChar)) {
                 left++
-            } else if (!vowels.contains(sArray[right])) {
+            } else if (!isVowel(rightChar)) {
                 right--
             } else {
-                val temp = sArray[left]
-                sArray[left] = sArray[right]
-                sArray[right] = temp
+                sArray[left] = rightChar
+                sArray[right] = leftChar
                 left++
                 right--
             }

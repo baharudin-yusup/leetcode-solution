@@ -1,15 +1,11 @@
 class Solution {
-    private fun isVowel(c: Char): Boolean {
-        return when(c) {
-            'a', 'i', 'u', 'e', 'o' -> true
-            else -> false
-        }
-    }
+    private val Char.isVowel
+        get() = this == 'a' || this == 'e' || this == 'i' || this == 'o' || this == 'u'
 
     fun maxVowels(s: String, k: Int): Int {
         var currentTotalVowel = 0
         for (i in 0 until k) {
-            if (isVowel(s[i])) {
+            if (s[i].isVowel) {
                 currentTotalVowel++
             }
         }
@@ -21,8 +17,8 @@ class Solution {
         var maxTotalVowel = currentTotalVowel
 
         for (i in k until s.length) {
-            val prevCounter = if (isVowel(s[i - k])) -1 else 0
-            var nextCounter = if (isVowel(s[i])) 1 else 0
+            val prevCounter = if (s[i - k].isVowel) -1 else 0
+            var nextCounter = if (s[i].isVowel) 1 else 0
             currentTotalVowel += prevCounter + nextCounter
             maxTotalVowel = max(maxTotalVowel, currentTotalVowel)
         }

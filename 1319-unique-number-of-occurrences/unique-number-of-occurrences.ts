@@ -5,14 +5,10 @@ function uniqueOccurrences(arr: number[]): boolean {
         numberMap[n] = (numberMap[n] ?? 0) + 1;
     });
 
-    const uniqueMap: Record<number, boolean> = {};
-    for (const [key, value] of Object.entries(numberMap)) {
-        if (uniqueMap[value]) {
-            return false
-        }
+    const numberSet = new Set<number>();
+    Object.entries(numberMap).forEach(([key, value]) => {
+        numberSet.add(value)
+    });
 
-        uniqueMap[value] = true
-    }
-
-    return true;
+    return numberSet.size == Object.keys(numberMap).length;
 };

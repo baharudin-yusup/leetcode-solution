@@ -1,41 +1,29 @@
-// dpLeft[i] = product of nums[0]...nums[i-2]...nums[i-1]
-// dpLeft[i-1] = product of nums[0]...nums[i-2]
-// dpLeft[i] = dpLeft[i-1] . nums[i-1]
-const dpLeft = [];
-// dpRight[i] = product of nums[i+1]...nums[1+2]...nums[n]
-// dpRight[i+1] = product of nums[i+2]...nums[n]
-// dpRight[i] = nums[i+1] . dpRight[i+1]
-const dpRight = [];
-
 function productExceptSelf(nums: number[]): number[] {
-
-    // Calculate dpLeft
+    const answer = [];
+    
+    // Calculate left product
+    // [2, 0, 7, 4, 6]
+    // 0 = 1 * 1 = 1
+    // 1 = 2 * 1 = 2
+    // 2 = 0 * 2 = 0
+    // 3 = 7 * 0 = 0
+    let leftProduct = 1;
     for (let i = 0; i < nums.length; i++) {
-        dpLeft[i] = calculateDpLeft(i, nums);
+        answer[i] = leftProduct;
+        leftProduct *= nums[i];
     }
 
-    // Calculate dpRight
+    // Calculate right product
+    // [2, 0, 7, 4, 6]
+    // 4 = 1 * 1 = 1
+    // 3 = 6 * 1 = 2
+    // 2 = 4 * 2 = 0
+    // 1 = 7 * 0 = 0
+    let rightProduct = 1;
     for (let j = nums.length - 1; j >= 0; j--) {
-        dpRight[j] = calculateDpRight(j, nums);
+        answer[j] *= rightProduct;
+        rightProduct *= nums[j];
     }
 
-    return nums.map((_num, idx) => {
-        return dpLeft[idx] * dpRight[idx];
-    });
+    return answer;
 };
-
-function calculateDpLeft(i: number, nums: number[]): number {
-    if (i == 0) {
-        return 1;
-    }
-
-    return dpLeft[i - 1] * nums[i - 1];
-}
-
-function calculateDpRight(i: number, nums: number[]): number {
-    if (i == nums.length - 1) {
-        return 1;
-    }
-
-    return nums[i + 1] * dpRight[i + 1];
-}

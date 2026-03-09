@@ -1,20 +1,19 @@
 class RecentCounter {
-    tArray: number[];
+    queue: number[];
     lastIndex: number;
 
     constructor() {
-        this.tArray = [];
-        this.lastIndex = 0;   
+        this.queue = []; 
     }
 
     ping(t: number): number {
-        this.tArray.push(t);
+        this.queue.push(t);
 
-        while (this.tArray[this.lastIndex] < t - 3000) {
-            this.lastIndex++;
+        while (this.queue[0] < t - 3000) {
+            this.queue.shift();
         }
 
-        return this.tArray.length - this.lastIndex;
+        return this.queue.length;
     }
 }
 

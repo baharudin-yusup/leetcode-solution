@@ -12,16 +12,17 @@ function guessNumber(n: number): number {
     let low = 1;
     let high = n;
     
-    while (true) {
-        const mid = (low + high) / 2
+    while (low <= high) {
+        const mid = Math.floor(low + (high - low) / 2)
         const result = guess(mid);
 
+        // Correct answer
         if (result == 0) {
             return mid;
         } 
         // Too low
-        else if (result > 0) {
-            low = mid;
+        else if (result == 1) {
+            low = mid + 1;
         }
         // Too high
         else {

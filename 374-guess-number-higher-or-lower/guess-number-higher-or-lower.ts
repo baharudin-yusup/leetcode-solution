@@ -26,7 +26,7 @@ function guessNumber(n: number): number {
         }
         // Too high
         else {
-            high = mid;
+            high = mid - 1;
         }
     }
 };

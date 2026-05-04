@@ -1,7 +1,7 @@
 class Solution {
     fun twoSum(nums: IntArray, target: Int): IntArray {
         // Current num -> index
-        val numberMap = mutableMapOf<Int, Int>()
+        val numberMap = hashMapOf<Int, Int>()
 
         nums.forEachIndexed { index, num ->
             val requiredNumIndex = numberMap[target - num]

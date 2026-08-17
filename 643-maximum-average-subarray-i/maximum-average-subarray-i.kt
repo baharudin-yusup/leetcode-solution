@@ -1,26 +1,18 @@
 class Solution {
     fun findMaxAverage(nums: IntArray, k: Int): Double {
+        var total = 0
         
-        if (nums.size == k) {
-            return (nums.sum() / k.toDouble())
-        }
-        
-        var currentTotal = 0
-
         // Initial value
         for (i in 0 until k) {
-            currentTotal += nums[i]
+            total += nums[i]
         }
 
-        var maxTotal = currentTotal
+        var current = total
         for (i in k until nums.size) {
-            currentTotal = currentTotal + nums[i] - nums[i - k]
-            if (currentTotal > maxTotal) {
-                maxTotal = currentTotal
-            }
+            current += nums[i] - nums[i - k]
+            total = maxOf(current, total)
         }
 
-
-        return maxTotal / k.toDouble()
+        return total / k.toDouble()
     }
 }

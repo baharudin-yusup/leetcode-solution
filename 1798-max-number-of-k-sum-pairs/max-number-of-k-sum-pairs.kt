@@ -23,7 +23,7 @@ class Solution {
                 }
 
                 // Increase the sum
-                sum < k -> {
+                else -> {
                     leftIndex++
                 }
             }

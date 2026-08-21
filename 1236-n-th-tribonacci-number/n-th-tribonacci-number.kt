@@ -1,26 +1,25 @@
 class Solution {
-    private val memo = mutableMapOf<Int, Int>()
-
     fun tribonacci(n: Int): Int {
-        when (n) {
-            0 -> {
-                return 0
-            }
-            1, 2 -> {
-                return 1
-            }
-            else -> {
-                val memoizeValue = memo[n]
+        var a = 0 // n-3
+        var b = 1 // n-2
+        var c = 1 // n-1
 
-                if (memoizeValue != null) {
-                    return memoizeValue
-                }
-
-                val result = tribonacci(n - 3) + tribonacci(n - 2) + tribonacci(n - 1)
-                memo[n] = result
-
-                return result
-            }
+        if (n == 0) {
+            return 0
         }
+
+        if (n < 3) {
+            return 1
+        }
+
+        for (i in 3..n) {
+            val newC = a + b + c
+            a = b
+            b = c
+            c = newC
+        }
+
+        // Return the newC (newC (n) --> a + b + c --> n-3 + n-2 + n-1)
+        return c
     }
 }

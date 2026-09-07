@@ -2,7 +2,6 @@ class Solution {
     fun longestSubarray(nums: IntArray): Int {
         var l = -1
         var totalZero = 0
-        var alreadyTrimmed = false
         var max = 0
         var curr = 0
         
@@ -11,7 +10,6 @@ class Solution {
                 curr++
             } else {
                 totalZero++
-                alreadyTrimmed = true
             }
 
             while (totalZero > 1 && l < nums.size) {
@@ -26,6 +24,6 @@ class Solution {
             max = maxOf(curr, max)
         }
 
-        return if (alreadyTrimmed) max else max - 1
+        return if (max == nums.size) max - 1 else max
     }
 }

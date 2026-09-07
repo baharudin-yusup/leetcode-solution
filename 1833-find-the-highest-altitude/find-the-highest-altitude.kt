@@ -1,13 +1,13 @@
 class Solution {
     fun largestAltitude(gain: IntArray): Int {
-        var currentAltitude = 0
-        var highestAltitude = 0
+        var highest = 0
+        var curr = 0
 
-        for (g in gain) {
-            currentAltitude += g
-            highestAltitude = max(highestAltitude, currentAltitude)
+        for (altitude in gain) {
+            curr += altitude
+            highest = maxOf(highest, curr)
         }
 
-        return highestAltitude
+        return highest
     }
 }
